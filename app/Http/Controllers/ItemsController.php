@@ -112,14 +112,14 @@ class ItemsController extends Controller
                 'Nama' => $request->Nama,
                 'Harga' => $request->Harga,
                 'Jumlah' => $request->Jumlah,
-                'Foto' => $request
+                'Foto' => $request->file('Foto')->store('Items')
             ]);
 
-        if ($request->hasFile('Foto')) {
-            $filename = $request->Foto->getClientOriginalName();
-            $request->Foto->storeAs('Items', $filename, 'public');
-            Item::find($item->id)->update(['Items' => $filename]);
-        }
+        // if ($request->hasFile('Foto')) {
+        //     $filename = $request->Foto->getClientOriginalName();
+        //     $request->Foto->storeAs('Items', $filename, 'public');
+        //     Item::find($item->id)->update(['Items' => $filename]);
+        // }
 
         return redirect('/items')->with('status', 'Data Barang Berhasil Diubah!');
     }
